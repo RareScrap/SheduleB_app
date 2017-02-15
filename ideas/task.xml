@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE task>
+<task id="123456" headline="хлеб" cretingDate="ДД/ММ/ГГГГ" type="single/repeat" parentID="12345" isCalendar="true/false" gpsLabel="названиеМестаИзСписка/координаты" notificationBefore="30min">
+   <description>
+      Купить #хлеб
+   </description>
+
+	<repeat days="0,1,4,5">
+		<repeatTime="7"></repeatTime>
+		<repeatUntil="ДД/ММ/ГГГГ"></repeatUntil>
+	</repeat>
+
+	<childrenID>
+		<taskLink targetID="1234567"></taskLink>
+	</childrenID>
+
+	<calendarView timeFrom="12.00" timeTo="15.00" color="#000000" backroundImg="???"> <!-- Может стоить хранить backroundImg внутри проги? -->
+	</calendarView>
+
+   
+   <metricList>
+      <metric type="tableCount" >Мука</ingredient> 
+      <metric type="inOutCount">Дрожжи</ingredient>
+      <metric type="lineDiagram" xAsix="ЕДИНИЦА_ИЗМЕРЕНИЯ" yAsix="ЕДИНИЦА_ИЗМЕРЕНИЯ" delimiterX="floatЧИСЛО" delimiterY="floatЧИСЛО">
+		<metric type="roundDiagram" l>
+   </metricList>
+</task>
