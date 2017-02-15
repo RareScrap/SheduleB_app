@@ -1,27 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE task>
-<task id="123456" headline="хлеб" cretingDate="ДД/ММ/ГГГГ" type="single/repeat" parentID="12345" isCalendar="true/false" gpsLabel="названиеМестаИзСписка/координаты" notificationBefore="30min">
-   <description>
-      Купить #хлеб
-   </description>
+<task id="123456" headline="хлеб" cretingDate="ДД/ММ/ГГГГ" type="single/repeat" notificationBefore="30min">
+	<description>
+		Купить #хлеб
+	</description>
+
+	<deadline date="ДД/ММ/ГГГГ" time="ЧЧ:ММ"></deadline>
+	<plannedTime date="ДД/ММ/ГГГГ" time="ЧЧ:ММ"></plannedTime>
+	<maps>
+		<point GPSLabel="???"></point>
+	</maps>
+
+	<parent id="123"></parent>
+
+	<subTaskList>
+		<subtask id="1231"></subtask>
+		<subtask id="1232"></subtask>
+		<subtask id="1233"></subtask>
+	</subTaskList>
 
 	<repeat days="0,1,4,5">
 		<repeatTime="7"></repeatTime>
 		<repeatUntil="ДД/ММ/ГГГГ"></repeatUntil>
 	</repeat>
 
-	<childrenID>
-		<taskLink targetID="1234567"></taskLink>
-	</childrenID>
+	<pushOptionList>
+		<pushOption date="ДД/ММ/ГГГГ" time="ЧЧ:ММ"></pushOption>
+	</pushOptionList>
 
 	<calendarView timeFrom="12.00" timeTo="15.00" color="#000000" backroundImg="???"> <!-- Может стоить хранить backroundImg внутри проги? -->
 	</calendarView>
 
-   
-   <metricList>
-      <metric type="tableCount" >Мука</ingredient> 
-      <metric type="inOutCount">Дрожжи</ingredient>
-      <metric type="lineDiagram" xAsix="ЕДИНИЦА_ИЗМЕРЕНИЯ" yAsix="ЕДИНИЦА_ИЗМЕРЕНИЯ" delimiterX="floatЧИСЛО" delimiterY="floatЧИСЛО">
+
+	<metricList>
+		<inOutDiagramMetric type="line/table">
+			<reasonsList>
+				<reason>Устал</reason>
+				<reason>Проспал</reason>
+				<reason>Забыл</reason>
+			</reasonsList>
+
+			<exceedDateList>
+				<exceedDate date="ДД/ММ/ГГГГ" time="ЧЧ:ММ"></exceedDate>
+				<exceedDate date="ДД/ММ/ГГГГ" time="ЧЧ:ММ"></exceedDate>
+				<exceedDate date="ДД/ММ/ГГГГ" time="ЧЧ:ММ"></exceedDate>
+			</exceedDateList>
+		</inOutDiagramMetric>
+
+		<molodecDiagramMetric>
+			<ratingList>
+				<rating value="0-100" date="ДД/ММ/ГГГГ"></rating>
+				<rating value="0-100" date="ДД/ММ/ГГГГ"></rating>
+				<rating value="0-100" date="ДД/ММ/ГГГГ"></rating>
+			</ratingList>
+		</molodecDiagramMetric>
+
+		<ExpectationRealityDiagramMetric>
+			<FacticalDid date="ДД/ММ/ГГГГ" time="ЧЧ:ММ"></FacticalDid>
+		</ExpectationRealityDiagramMetric>
+		
+		<metric type="lineDiagram" xAsix="ЕДИНИЦА_ИЗМЕРЕНИЯ" yAsix="ЕДИНИЦА_ИЗМЕРЕНИЯ" delimiterX="floatЧИСЛО" delimiterY="floatЧИСЛО">
 		<metric type="roundDiagram" l>
-   </metricList>
+	</metricList>
 </task>
