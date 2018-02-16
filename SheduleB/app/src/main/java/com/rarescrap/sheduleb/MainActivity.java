@@ -6,9 +6,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         MainFragment mainFragment = MainFragment.newInstance();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment_main, mainFragment); // startFragment заменяет контейнер лдя фрагментов "fragment_menu_container"
+        transaction.replace(R.id.fragment_main, mainFragment); // Не использую add, т.к. это ведет к дублированию вьюъ при изменении ориентации экрана
         transaction.commit();
     }
 
