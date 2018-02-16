@@ -11,18 +11,18 @@ import com.rarescrap.sheduleb.ViewHolder.FolderPlateViewHolder;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * @author RareScrap
  */
 public class MainFragmentAdapter extends RecyclerView.Adapter<AbstractHolder> {
-    private List listFolders;
+    private List<File> listFolders;
 
-    public MainFragmentAdapter(File[] listFolders) {
-        this.listFolders = new ArrayList();
-        Collections.addAll(this.listFolders, listFolders); // TODO: Сделать бы это в одну строку
+    public MainFragmentAdapter(File mainFolder) {
+        this.listFolders = new ArrayList<>();
+        listFolders.addAll(Arrays.asList(mainFolder.listFiles()));
     }
 
     @Override
@@ -45,4 +45,11 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<AbstractHolder> {
         return listFolders.size();
     }
 
+    /**
+     * Добавляет папку к данным адаптера
+     * @param folder Папка которую следует добавить
+     **/
+    public void add(File folder) {
+        listFolders.add(folder);
+    }
 }

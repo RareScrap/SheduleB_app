@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="create_folder_name_hint">Имя раздела</string>
+    <string name="create_folder_description_hint">Описание</string>
+    <string name="title_create_folder_dialog">Новый раздел</string>
+    <string name="create_folder">Создать</string>
+</resources>

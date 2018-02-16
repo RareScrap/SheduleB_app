@@ -1,8 +1,8 @@
 package com.rarescrap.sheduleb;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,7 +10,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
+    private static final String LIST_FOLDER_NAME = "todo_lists";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +26,16 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MainFragment.TAG);
+                if (mainFragment != null && mainFragment.isVisible()) {
+                    mainFragment.showAddFolderDialog();
+                }
             }
         });
 
         MainFragment mainFragment = MainFragment.newInstance();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_main, mainFragment); // Не использую add, т.к. это ведет к дублированию вьюъ при изменении ориентации экрана
+        transaction.replace(R.id.fragment_main, mainFragment, MainFragment.TAG); // Не использую add, т.к. это ведет к дублированию вьюъ при изменении ориентации экрана
         transaction.commit();
     }
 
@@ -54,5 +59,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Возвращает папку, где хранятся списки дел
+     * @param context Контекст для доступа к файловой системе
+     * @return Папка со списками дел
+     */
+    public static File getListsFolder(Context context) {
+        // Проверяем, если ли в директории приложения папка со спискми дел
+        for (File folder : context.getFilesDir().listFiles()) { // TODO: использовать FileFilter
+            if (LIST_FOLDER_NAME.equals(folder.getName())) {
+                return folder;
+            }
+        }
+
+        // Если директория со списками дел не найдена - создадим ее
+        File listsFolder = new File(context.getFilesDir().getAbsolutePath() + File.separator + LIST_FOLDER_NAME);
+        listsFolder.mkdir();
+        return listsFolder;
     }
 }

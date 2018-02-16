@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rarescrap.sheduleb.adapters.MainFragmentAdapter;
+import com.rarescrap.sheduleb.dialogs.CreateFolderDialogFragment;
 
 import java.io.File;
 
@@ -17,7 +18,7 @@ import java.io.File;
  * A placeholder fragment containing a simple view.
  */
 public class MainFragment extends Fragment {
-    private static final String LIST_FOLDER_NAME = "todo_lists";
+    public static final String TAG = "MainFragment";
 
     RecyclerView mRecyclerView;
     MainFragmentAdapter mAdapter;
@@ -36,31 +37,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        File appDir = getActivity().getFilesDir();
-        File mainDir = null;
-
-        // Проверяем, если ли в директории приложения папка со спискми дел
-        for (File file : appDir.listFiles()) { // TODO: использовать FileFilter
-            if (LIST_FOLDER_NAME.equals(file.getName())) {
-                mainDir = file;
-                break;
-            }
-        }
-
-        // Если директория со списками дел не найдена - создадим ее
-        if (mainDir == null) {
-            mainDir = new File(appDir.getAbsolutePath() + File.separator + LIST_FOLDER_NAME);
-            mainDir.mkdir();
-        }
-
-        for (int i = 0; i < 50; i++) {
-            File debugDir;
-            debugDir = new File(mainDir.getAbsolutePath() + File.separator + "debug" + i);
-            debugDir.mkdir();
-        }
-
-        mAdapter = new MainFragmentAdapter(mainDir.listFiles());
+        mAdapter = new MainFragmentAdapter(MainActivity.getListsFolder(getContext()));
     }
 
     @Override
@@ -76,4 +53,18 @@ public class MainFragment extends Fragment {
 
         return inflatedView;
     }
+
+    public void showAddFolderDialog() {
+        CreateFolderDialogFragment dialog = new CreateFolderDialogFragment();
+        dialog.setOnFolderCreateListener(new CreateFolderDialogFragment.OnFolderCreateListener() {
+            @Override
+            public void onFolderCreate(File createdFolder) {
+                mAdapter.add(createdFolder);
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+        dialog.show(getFragmentManager(), CreateFolderDialogFragment.TAG);
+    }
+
+
 }
